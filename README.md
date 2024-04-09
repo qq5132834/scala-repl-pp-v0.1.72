@@ -14,7 +14,7 @@ srp wraps the stock Scala 3 REPL and adds many features inspired by ammonite and
 This is (also) a breeding ground for improvements to the stock Scala REPL: we're forking parts of the REPL to later bring the changes back into the dotty codebase.
 
 ## Installation / quick start
-```bash
+```bashd
 # download latest release and make executable
 curl -fL https://github.com/mpollmeier/scala-repl-pp/releases/latest/download/srp > srp
 chmod +x srp
