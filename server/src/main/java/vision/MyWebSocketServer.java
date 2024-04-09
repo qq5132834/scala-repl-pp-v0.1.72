@@ -48,6 +48,7 @@ public class MyWebSocketServer extends WebSocketServer {
     @Override
     public void onMessage(WebSocket conn, String message) {
         System.out.println("onMessage : " + conn.getRemoteSocketAddress().getAddress().getHostAddress() + " String = " + message);
+        conn.send("hi, " + message);
     }
 
     @Override
