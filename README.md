@@ -1,3 +1,10 @@
+## 导入idea中
+```
+file -> New -> Project from Existing Sources... ->  选择sbt创建导入到idea中
+```
+
+
+
 [![Release](https://github.com/mpollmeier/scala-repl-pp/actions/workflows/release.yml/badge.svg)](https://github.com/mpollmeier/scala-repl-pp/actions/workflows/release.yml)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.michaelpollmeier/scala-repl-pp_3/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.michaelpollmeier/scala-repl-pp_3)
 
