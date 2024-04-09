@@ -18,6 +18,9 @@ class EmbeddedReplTests extends AnyWordSpec with Matchers {
     repl.query("val x = 0").output.trim shouldBe "val x: Int = 0"
     repl.query("x + 1").output.trim     shouldBe "val res0: Int = 1"
 
+    var queryResult = repl.query("System.out.println(x + 2)")
+    System.out.print(",,,,,,,,,>>>>" + queryResult.output + "<<<<")
+
     repl.shutdown()
   }
 
