@@ -7,6 +7,7 @@ import replpp.Colors.BlackWhite
 import replpp.{Config, ReplDriverBase, pwd}
 
 import java.io.*
+import java.lang
 import java.nio.charset.StandardCharsets
 import java.util.UUID
 import java.util.concurrent.{BlockingQueue, Executors, LinkedBlockingQueue, Semaphore}
@@ -25,7 +26,7 @@ class EmbeddedRepl(predefLines: IterableOnce[String] = Seq.empty) {
     val inheritedClasspath = System.getProperty("java.class.path")
     val compilerArgs = Array(
       "-classpath", inheritedClasspath,
-      "-explain", // verbose scalac error messages
+      "-explain", // verbose scalac error messages. 详细标量错误消息。
       "-deprecation",
       "-color", "never"
     )
@@ -53,7 +54,7 @@ class EmbeddedRepl(predefLines: IterableOnce[String] = Seq.empty) {
     val future = Future {
       state = replDriver.execute(inputLines)(using state)
       readAndResetReplOutputStream()
-    } (using singleThreadedJobExecutor)
+    } (using singleThreadedJobExecutor)  //在单线程池中处理
 
     (uuid, future)
   }
@@ -65,10 +66,14 @@ class EmbeddedRepl(predefLines: IterableOnce[String] = Seq.empty) {
   }
 
   /** Submit query to the repl, await and return results. 将查询提交给repl，等待并返回结果。 */
-  def query(code: String): QueryResult =
-    query(code.linesIterator)
+  def query(code: String): QueryResult = {
+    System.out.println("查询：" + code)
+    var queryResult = query(code.linesIterator)
+    System.out.println("结果：" + queryResult.output)
+    queryResult
+  }
 
-  /** Submit query to the repl, await and return results. */
+  /** Submit query to the repl, await and return results. 将查询提交给repl，等待并返回结果。 */
   def query(inputLines: IterableOnce[String]): QueryResult = {
     val (uuid, futureResult) = queryAsync(inputLines)
     val result = Await.result(futureResult, Duration.Inf)
