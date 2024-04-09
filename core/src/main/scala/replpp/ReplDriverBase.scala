@@ -23,6 +23,9 @@ import scala.collection.mutable
 import scala.jdk.CollectionConverters.*
 import scala.util.{Failure, Success, Try}
 
+/***
+ * ReplDriverBase REPL驱动，被交互式 REPL、 webSocket REPL继承，还将扩展 HTTP， RMI 两种交互方式
+ */
 abstract class ReplDriverBase(args: Array[String],
                               out: PrintStream,
                               maxHeight: Option[Int],
