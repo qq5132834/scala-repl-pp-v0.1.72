@@ -18,7 +18,7 @@ import scala.util.{Failure, Success}
 class EmbeddedRepl(predefLines: IterableOnce[String] = Seq.empty) {
   private val logger: Logger = LoggerFactory.getLogger(getClass)
 
-  /** repl and compiler output ends up in this replOutputStream */
+  /** repl and compiler output ends up in this replOutputStream. repl和编译器输出最终在这个replOutputStream中。 */
   private val replOutputStream = new ByteArrayOutputStream()
 
   private val replDriver: ReplDriver = {
@@ -43,11 +43,11 @@ class EmbeddedRepl(predefLines: IterableOnce[String] = Seq.empty) {
   private val singleThreadedJobExecutor: ExecutionContextExecutorService =
     ExecutionContext.fromExecutorService(Executors.newSingleThreadExecutor())
 
-  /** Execute `inputLines` in REPL (in single threaded ExecutorService) and provide Future for result callback */
+  /** Execute `inputLines` in REPL (in single threaded ExecutorService) and provide Future for result callback. 在REPL（在单线程ExecutorService中）中执行“inputLines”，并为结果回调提供Future。 */
   def queryAsync(code: String): (UUID, Future[String]) =
     queryAsync(code.linesIterator)
 
-  /** Execute `inputLines` in REPL (in single threaded ExecutorService) and provide Future for result callback */
+  /** Execute `inputLines` in REPL (in single threaded ExecutorService) and provide Future for result callback. 在REPL（在单线程ExecutorService中）中执行“inputLines”，并为结果回调提供Future。 */
   def queryAsync(inputLines: IterableOnce[String]): (UUID, Future[String]) = {
     val uuid = UUID.randomUUID()
     val future = Future {
@@ -64,7 +64,7 @@ class EmbeddedRepl(predefLines: IterableOnce[String] = Seq.empty) {
     result
   }
 
-  /** Submit query to the repl, await and return results. */
+  /** Submit query to the repl, await and return results. 将查询提交给repl，等待并返回结果。 */
   def query(code: String): QueryResult =
     query(code.linesIterator)
 
@@ -75,7 +75,7 @@ class EmbeddedRepl(predefLines: IterableOnce[String] = Seq.empty) {
     QueryResult(result, uuid, success = true)
   }
 
-  /** Shutdown the embedded shell and associated threads.
+  /** Shutdown the embedded shell and associated threads. 关闭嵌入式shell和相关线程。
     */
   def shutdown(): Unit = {
     logger.info("shutting down")
