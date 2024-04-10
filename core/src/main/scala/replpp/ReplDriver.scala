@@ -31,7 +31,15 @@ class ReplDriver(args: Array[String],
     @tailrec
     def loop(using state: State)(): State = {
       Try {
+        println("循环等待输入")
         val inputLines = readLine(terminal, state)
+
+        var index = 0
+        for (lineStr <- inputLines) {
+          index += 1
+          println(index + ":>>>" + lineStr + "<<<")
+        }
+
         interpretInput(inputLines, state, pwd)
       } match {
         case Success(newState) =>
