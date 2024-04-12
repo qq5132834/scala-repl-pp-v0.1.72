@@ -81,6 +81,9 @@ class ReplServer(repl: EmbeddedRepl,
     }
   }
 
+  /***
+   * 同步查询
+   */
   @basicAuth()
   @cask.postJson("/query-sync")
   def postQuerySimple(query: String)(isAuthorized: Boolean): Response[Obj] = {
