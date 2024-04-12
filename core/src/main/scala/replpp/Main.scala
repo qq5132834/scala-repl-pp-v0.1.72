@@ -3,9 +3,12 @@ package replpp
 import replpp.scripting.ScriptRunner
 
 object Main {
-  def main(args: Array[String]): Unit = {
+  def main(args1: Array[String]): Unit = {
+    val args = Array(
+                      "--greeting", "welcome to use vision.", // 问候
+                      "--prompt", "vision" // Terminal 提示语
+                     )
     val config = Config.parse(args)
-
 
     if (config.scriptFile.isDefined) {
       //脚本运行
